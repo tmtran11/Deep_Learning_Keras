@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Dec 22 22:15:04 2017
-
+Following instruction, I learn to create a convolutional neural network to perform image regcognigtion
 @author: FPTShop
 """
 # update keras
