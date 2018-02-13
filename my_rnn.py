@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Dec 23 17:03:14 2017
-
+Following instruction, I create a recurrent neural network to predct Google stock price
+As a follow up, I implement by myself additional indicator, which is th Microsoft stock prices, in order to tuning up the model
+csv files can be found in Deep_learning directory
 @author: FPTShop
 """
 import numpy as np
