@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Dec 20 23:05:15 2017
-
-@author: FPTShop
+Follow instruction, I learn to create a artificial neural network and perform parameter turning
+'Churn_Modelling.csv' file in Deep_learning directory
 """
 
 # Importing the libraries
@@ -49,7 +49,6 @@ classifier.add(Dense(units = 1, kernel_initializer = 'uniform', activation = 'si
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 # Fitting classifier to the Training set
 classifier.fit(X_train, y_train, batch_size = 10, nb_epoch = 100)
-# Create your classifier here
 
 # Predicting the Test set results
 y_pred = classifier.predict(X_test)
