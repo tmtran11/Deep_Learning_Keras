@@ -10,16 +10,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+# put cvs file in Pandas DataFrame
 dataset_train = pd.read_csv('GOOG.csv')
 training_set = dataset_train.iloc[:, 1:2].values
 dataset_indicator = pd.read_csv('MSFT.csv')
 indicator_set = dataset_indicator.iloc[:, 1:2].values
 
+# Using Scaler from sklearn to transform to weight the training set according to one standard
 from sklearn.preprocessing import MinMaxScaler
 sc = MinMaxScaler()
 training_set_scaled = sc.fit_transform(training_set)
 indicator_set_scaled = sc.transform(indicator_set)
 
+# Seperate training set
 X_train = []
 y_train = []
 for i in range(120, 1762):
@@ -39,7 +42,8 @@ X_indicator = np.reshape(X_indicator, (X_indicator.shape[0], X_indicator.shape[1
 
 X_train = np.concatenate((X_train, X_indicator), axis = 2)
 
-from keras.models import Sequential
+# Build recurrent neural neural network
+from keras.models import Sequential # mode sequential   
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers import Dropout
@@ -78,10 +82,8 @@ inputs2 = dataset_total2[(len(dataset_total2)-len(dataset_test2)-120):].values
 inputs2 = inputs2.reshape(-1, 1)
 inputs2 = sc.transform(inputs2)
 
-# tuning for optimizer, epoch, batch. Not use metric accuracy but neg_mean_squared_error
-
 X_test1 = []
-for i in range(120, 367): #fix
+for i in range(120, 367):
     X_test1.append(inputs1[(i-120):i, 0])   
 X_test1 = np.array(X_test1)
 X_test1 = np.reshape(X_test1, (X_test1.shape[0], X_test1.shape[1], 1))
@@ -97,7 +99,6 @@ X_test = np.concatenate((X_test1, X_test2), axis = 2)
 
 pred_stock_price = regressor.predict(X_test)
 pred_stock_price = sc.inverse_transform(pred_stock_price)
-# find shape and then continue
 
 plt.plot(real_stock_price_1, color = 'red', label = 'real')
 plt.plot(pred_stock_price, color = 'blue', label = 'pred')
